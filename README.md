@@ -41,7 +41,7 @@ Now you can build the final container image. Choose a name for your container im
 
 Start your server like this. Replace `xmpp.example.com` with the name of the image you built in the last step. Replace `example.com` with your own domain.
 
-    docker run -d -p 5222:5222 -p 5269:5269 -p 5280:5280 -p 5347:5347 -v .prosody:/var/lib/prosody -e "XMPP_DOMAIN=example.com" xmpp.example.com
+    docker run -d -p 5222:5222 -p 5269:5269 -p 5280:5280 -p 5347:5347 -v $(pwd)/.prosody:/var/lib/prosody -e "XMPP_DOMAIN=example.com" xmpp.example.com
 
 You need to forward the above ports in your firewall to this machine.
 
@@ -51,7 +51,7 @@ Prosody's data will be stored in the directory _.prosody_ inside the current dir
 
 You can add user logins like this. Replace `xmpp.example.com` with the name of your image. Also, replace `username`, `example.com` and `password` accordingly:
 
-    docker run --rm -v .prosody:/var/lib/prosody xmpp.example.com prosodyctl register username example.com password
+    docker run --rm -v $(pwd)/.prosody:/var/lib/prosody xmpp.example.com prosodyctl register username example.com password
 
 ## Add DNS records
 

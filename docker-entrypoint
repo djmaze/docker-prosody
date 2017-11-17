@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euo pipefail
+
+CERTS_DIR=/etc/prosody/certs
+
+mkdir -p /var/run/prosody
+chown prosody /var/run/prosody /var/lib/prosody
+
+(while inotifywait -r -e close_write "$CERTS_DIR"; do
+  prosodyctl reload
+done) &
+
+exec $*
